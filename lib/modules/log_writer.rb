@@ -4,11 +4,16 @@ module Logman
     post '/api/write' do
       json = JSON.parse(request.body.read) 
       bucket = Bucket.find_by_write_token(params[:key])
-      return 'Invalid token' if bucket.nil?
+      if bucket.nil?
+        status 401
+        return 'Invalid token' 
+      end
       
       log = Log.new(json)
       log.datetime = Time.now if log.datetime.blank?
-
+      log.bucket = bucket
+      
+      
       if log.save
         return status 200
       else

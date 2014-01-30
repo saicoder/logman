@@ -1,4 +1,4 @@
-require './lib/logman/system'
+require 'logman'
 
 Logman.configure do |config|
   config.database_uri = 'mongodb://localhost:5556/logman'

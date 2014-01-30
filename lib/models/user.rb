@@ -1,5 +1,4 @@
 
-require './lib/modules/secure_password'
 
 module Logman
   class User

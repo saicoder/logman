@@ -1,5 +1,3 @@
 require "logman/version"
+require "logman/system"
 
-module Logman
-  # Your code goes here...
-end

@@ -2,14 +2,16 @@ require 'mongo_mapper'
 require 'sinatra'
 require "sinatra/json"
 
+require  File.dirname(__FILE__) +'/../modules/secure_password'
+
 # models
-require './lib/models/user'
-require './lib/models/bucket'
-require './lib/models/log'
+require File.dirname(__FILE__) + '/../models/user'
+require File.dirname(__FILE__) + '/../models/bucket'
+require File.dirname(__FILE__) + '/../models/log'
 
 # modules
-require './lib/modules/log_writer'
-require './lib/console/web_console'
+require File.dirname(__FILE__) + '/../modules/log_writer'
+require File.dirname(__FILE__) + '/../console/web_console'
 
 module Logman
   class Config
@@ -46,6 +48,6 @@ module Logman
   def self.configure(&block)
       block.call Logman::Config.instance
       
-      require './lib/logman/server'
+      require File.dirname(__FILE__) + '/../logman/server'
   end
 end
