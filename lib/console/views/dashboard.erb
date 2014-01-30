@@ -1,0 +1,30 @@
+<h2>Dashboard</h2>
+<hr>
+
+<div id="usageChart"></div>
+ 
+
+
+<script type="text/javascript" charset="utf-8">
+
+	$(function(){
+		 Morris.Area({
+	        element: 'usageChart',
+	        data: [
+	    <%graph_data.each do |t|%>
+	        {
+	            period: '<%= t[:date]%>',
+	            logs: <%= t[:count]%>
+	        },
+	     <%end%>   
+	        ],
+	        xkey: 'period',
+	        ykeys: ['logs'],
+	        labels: ['Log count'],
+	        pointSize: 2,
+	        hideHover: 'auto',
+	        resize: true
+	    });
+	    
+	});
+</script>

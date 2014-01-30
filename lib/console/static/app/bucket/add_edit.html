@@ -1,0 +1,40 @@
+
+<div class="col-lg-12" ng-controller="BucketAddEditCtl">
+ <h1 class="page-header"> <i class="fa fa-bitbucket"></i> {{bucket.name || 'New bucket'}}</h1>
+ 
+ <div class="row">
+ 	<div class="col-lg-6">
+	 <form role="form" ng-submit="saveCreate()">
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Bucket Name</label>
+	    <input type="text" required ng-model="bucket.name" class="form-control" placeholder="Bucket name">
+	  </div>
+	  
+	  <div class="form-group">
+	    <label for="exampleInputPassword1">Access Permisions</label>
+	    
+	    <div ng-repeat="u in users" class="checkbox">
+		  <label>
+		    <input type="checkbox"  ng-checked="haveAccess(u)" ng-click="invertAccess(u)">
+		     {{u.name}} <span class="small" ng-if="u.admin">[Admin]</span> 
+		  </label>
+		</div>
+	    
+	  </div>
+	  
+	  <div class="form-group" ng-if="bucket.id">
+	    <label for="exampleInputPassword1">Write Token</label>
+	    <p class="form-control-static">
+	    	<code>{{bucket.write_token}}</code>
+	    	&nbsp;
+	    	<button type="button" class="btn btn-xs btn-danger" ng-click="generateToken()">Regenerate</button>	
+	    </p>
+	  </div>
+	  
+	  <button type="submit" class="btn btn-default">Save</button>
+	  <button type="button" ng-click="destroyBucket()" class="btn btn-danger">Destroy</button>
+	</form>
+   </div>
+ </div>
+ 
+</div>

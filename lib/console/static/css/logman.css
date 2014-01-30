@@ -1,0 +1,59 @@
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.log-entry{
+	margin: 0 0 3px;
+	padding: 9px 10px;
+	
+	cursor: pointer;
+}
+.log-entry .log-text{
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+
+.log-entry-type1{
+	border-left-color: rgba(231, 76, 60,1.0);
+	background-color: rgba(231, 76, 60,0.1);
+}
+
+.log-entry-type2{
+	border-left-color: rgba(46, 204, 113,1.0);
+	background-color: rgba(46, 204, 113,0.1);
+}
+
+.log-entry-type3{
+	border-left-color: rgba(241, 196, 15,1.0);
+	background-color: rgba(241, 196, 15,0.1);
+}
+
+.log-entry-type4{
+	border-left-color: rgba(52, 152, 219,1.0);
+	background-color: rgba(52, 152, 219,0.1);
+}
+
+
+.full-modal .modal-dialog{
+	width:auto;
+	margin: 6%;
+}
+
+
+/* Common styles for all types */
+.log-detail {
+  padding: 5px;
+  border-left: 3px solid #eee;
+  margin-bottom: 3px;
+  
+  /*background-color: #f4f8fa;
+  border-color: #bce8f1;*/
+}
+.log-detail h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  /*color: #34789a;*/
+}
+.log-detail p:last-child {
+  margin-bottom: 0;
+}

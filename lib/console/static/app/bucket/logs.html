@@ -1,0 +1,23 @@
+<div ng-controller="LogsCtl">
+	<h3> <i class="fa fa-list"></i> {{bucket.name}}</h3>
+	<hr>
+		
+	<blockquote class="log-entry log-entry-type{{l.log_type}}" ng-repeat="l in logs.items">
+		<div class="row" ng-click="show(l)">
+			<div class="col-lg-9 log-text">
+				{{l.message}}
+			</div>
+			<div class="col-lg-3">
+				<span class="small pull-right">{{l.created_at | date:'medium'}}</span>
+			</div>
+		</div>
+	</blockquote>
+	
+	<div class="jumbotron" ng-show="logs.items.length == 0">
+	  <h2>No Logs</h2>
+	  <p>Start adding logs by sending POST request to logman endpoint</p>
+	  <p><a href="#/api_guide" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+	</div>
+	
+	<pagination ng-show="logs.items.length != 0" total-items="logs.total_items" on-select-page="loadLogs(page)" page="logs.page" class="pagination-sm"></pagination>
+</div>

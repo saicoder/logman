@@ -1,0 +1,37 @@
+
+<div class="modal-header">
+    <h3> <i class="fa fa-th-large"></i> Log Details</h3>
+</div>
+<div class="modal-body">
+	
+    <div class="log-detail">
+    	<h4>Message</h4>
+    	 <p>{{log.message}}</p>
+   	</div>
+   	
+  	<dl>
+  		<dt>Log Type</dt>
+  		<dd> <span class="text-{{log_type(log,true)}}">{{log_type(log)}}</span> </dd>
+  		
+  		<dt>Date Gentared</dt>
+  		<dd class="text-muted"> {{(log.datetime || log.created_at) | date:'medium' }} </dd>
+  		
+  		<dt>Arrvived at Server</dt>
+  		<dd class="text-muted"> {{log.created_at | date:'medium' }} </dd>
+  		
+  		<dt>Source</dt>
+  		<dd>
+  			<span ng-repeat="s in log.sources">{{s.name}} <span class="text-muted">({{s.ip}})</span> &nbsp;&nbsp; </span>
+  		</dd>
+    </dl>
+    
+     <div class="log-detail" ng-if="log.data">
+    	<h4>Data</h4>
+    	<div json-tree json-data="formatData(log.data)"></div>
+   	</div>
+  	
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+</div>
+
