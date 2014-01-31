@@ -32,7 +32,7 @@
 	  </div>
 	  
 	  <button type="submit" class="btn btn-default">Save</button>
-	  <button type="button" ng-click="destroyBucket()" class="btn btn-danger">Destroy</button>
+	  <button ng-show="bucket.id!=null" type="button" ng-click="destroyBucket()" class="btn btn-danger">Destroy</button>
 	</form>
    </div>
  </div>

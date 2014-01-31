@@ -20,11 +20,11 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-
-  spec.add_development_dependency "sinatra"
-  spec.add_development_dependency "sinatra-contrib"
   spec.add_development_dependency "bson_ext"
-  spec.add_development_dependency "mongo_mapper"
-  spec.add_development_dependency "bcrypt-ruby", '~> 3.1.2'
+  
+  spec.add_runtime_dependency "sinatra"
+  spec.add_runtime_dependency "sinatra-contrib"
+  spec.add_runtime_dependency "mongo_mapper"
+  spec.add_runtime_dependency "bcrypt-ruby", '~> 3.1.2'
 
 end
