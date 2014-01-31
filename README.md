@@ -2,23 +2,23 @@
 
 Logman is Web Console/API for gathering logs from various sources and analyzing them. Logs are saved to mongo database.
 
+![](https://dl.dropboxusercontent.com/u/39131387/logman-b.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'logman'
+    gem 'logman', :git=>'git@github.com:saicoder/logman.git'
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install logman
+Version of logman at Rubygems.org currently don't have dependencies defined, so best way to install it is over git
 
 ## Usage
 
-Create rackup file `config.ru` with content:
+Create rackup file `logman.ru` with content:
 
 ```ruby
 require 'logman'
@@ -34,7 +34,7 @@ run Logman::Server
 
 ```
 
-Execute `rackup -p 3000` 
+Execute `rackup logman.ru` command 
 
 ## Contributing
 
