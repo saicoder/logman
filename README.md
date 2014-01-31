@@ -1,6 +1,6 @@
 # Logman
 
-TODO: Write a gem description
+Logman is Web Console/API for gathering logs from various sources and analyzing them. Logs are saved to mongo database.
 
 ## Installation
 
@@ -18,7 +18,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create rackup file `config.ru` with content:
+
+```ruby
+require 'logman'
+
+Logman.configure do |config|
+  config.database_uri = 'mongodb://localhost/logman'
+  
+  config.log_writer = Logman::LogWriter
+  config.web_console = Logman::WebConsole
+end
+
+run Logman::Server
+
+```
+
+Execute `rackup -p 3000` 
 
 ## Contributing
 
