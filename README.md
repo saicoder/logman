@@ -8,7 +8,7 @@ Logman is Web Console/API for gathering logs from various sources and analyzing 
 
 Add this line to your application's Gemfile:
 
-    gem 'logman', :git=>'git@github.com:saicoder/logman.git'
+    gem 'logman', :git=>'git://github.com/saicoder/logman.git'
 
 And then execute:
 
