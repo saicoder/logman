@@ -15,10 +15,15 @@ module Logman
     many :sources, :class_name=>'Logman::Source'
     
     def self.count_on_date(date)
-      start_time = Time.new(date.year, date.month, date.day, 0,0,0).utc
-      end_time   = Time.new(date.year, date.month, date.day+1, 0,0,0).utc
-      
-      Log.where(:created_at => { :$gte => start_time }).where(:created_at => { :$lt  => end_time   }).count
+      begin
+        # raise date.to_s
+        start_time = Time.new(date.year, date.month, date.day, 0,0,0).utc
+        end_time   = Time.new(date.year, date.month, date.day+1, 0,0,0).utc
+        
+        Log.where(:created_at => { :$gte => start_time }).where(:created_at => { :$lt  => end_time   }).count
+      rescue
+        0
+      end
     end
     
     timestamps!

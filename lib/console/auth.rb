@@ -23,7 +23,7 @@ module Logman
       user = User.find_by_email(params[:email])
      
       if user.nil? || user.authenticate(params[:password]).blank?
-        erb :login, locals:{ :invalid=> true }
+        erb :login, locals:{ :invalid=> true, :register=>false }
       else
         session[:user_id] = user.id.to_s
         redirect '/'
