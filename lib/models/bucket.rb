@@ -1,22 +1,25 @@
 
 module Logman
   class Bucket
-    include MongoMapper::Document
-    set_collection_name 'logman_buckets'
+    include Mongoid::Document
+    self.collection_name = 'logman_buckets'
     
-    attr_accessible :name, :user_ids
+    attr_protected :write_token
+    validates_presence_of :name
     
-    key :name, String, :required=>true
-    key :write_token, String
-    key :user_ids, Array
+    field :name, type: String
+    field :write_token,type: String
+    field :user_ids, type: Array
     
-    many :users, :in => :user_ids, :class_name=>'Logman::User'
-    
-    many :logs, :class_name=>'Logman::Log'
+    has_many :logs, :class_name=>'Logman::Log'
     
     def user_ids=(val)
       val = val.map {|key| BSON::ObjectId(key) }
       write_attribute(:user_ids, val)
+    end
+    
+    def users
+      User.where(:id.in => :user_ids)
     end
     
     before_create :new_token
@@ -24,7 +27,6 @@ module Logman
     def new_token
       self.write_token = generate_new_token
     end
-    
     
     def generate_new_token
       while true

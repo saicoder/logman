@@ -22,9 +22,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "bson_ext"
   
-  spec.add_runtime_dependency "sinatra"
-  spec.add_runtime_dependency "sinatra-contrib"
-  spec.add_runtime_dependency "mongo_mapper"
+  spec.add_runtime_dependency "sinatra", "~> 1.4.4"
+  spec.add_runtime_dependency "sinatra-contrib", "~> 1.4.2"
+  spec.add_runtime_dependency "mongoid", "~> 3.1.6"
   spec.add_runtime_dependency "bcrypt-ruby", '~> 3.1.2'
 
 end

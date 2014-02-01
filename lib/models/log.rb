@@ -1,18 +1,19 @@
 module Logman
   class Log
-    include MongoMapper::Document
+    include Mongoid::Document
+    
     belongs_to :bucket
-    attr_accessible :log_type, :data_type, :message, :data, :datetime,:sources
+    validates_presence_of :log_type, :message
     
-    key :log_type, Integer, :required=>true  #1-error, 2-success, 3-warning, 4-info
-    key :data_type, String #application that generated log like syslog,
+    field :log_type, type: Integer  #1-error, 2-success, 3-warning, 4-info
+    field :data_type, type: String  #application that generated log like syslog,
     
-    key :message, String, :required=>true #short string message
-    key :data, Hash
+    field :message, type: String          #short string message
+    field :data, type: Hash
     
-    key :datetime, Time
+    field :datetime, Time
     
-    many :sources, :class_name=>'Logman::Source'
+    embeds_many :sources, :class_name=>'Logman::Source'
     
     def self.count_on_date(date)
       begin
@@ -31,11 +32,11 @@ module Logman
   
   
   class Source
-    include MongoMapper::EmbeddedDocument
-    attr_accessible :name, :ip_address, :hop
+    include Mongoid::Document
+    embedded_in :log, :class_name=>'Logman::Log'
     
-    key :name, String
-    key :ip_address, String
-    key :hop, Integer, :default=>0
+    field :name, type: String
+    field :ip_address, type: String
+    field :hop, type: Integer
   end
 end

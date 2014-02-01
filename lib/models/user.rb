@@ -2,23 +2,24 @@
 
 module Logman
   class User
-    include MongoMapper::Document
+    include Mongoid::Document
+    self.collection_name = 'logman_users'
+
+    has_secure_password :validations=>false
     
+    validates_presence_of :email, :name
+    validates_presence_of :password, :on=> :create
+    validates_uniqueness_of :email
+    validates_format_of :email, with: /.+\@.+\..+/
     
-    set_collection_name 'logman_users'
-    
-    attr_accessible :email, :name, :admin, :password
-    
-    has_secure_password :validations=>false, :validations=>false
-    
-    key :email, String, :required=>true, :unique=>true, :format=> /.+\@.+\..+/
-    key :password_digest, String #, :required=>true
-    key :name, String, :required=>true
-    key :admin, Boolean
+    field :email, type: String
+    field :password_digest, type: String
+    field :name, type: String 
+    field :admin, type: Boolean
     
     # buckets that user have access     
     def buckets
-      return Bucket.where if self.admin
+      return Bucket.all if self.admin
       
       Bucket.where(:user_ids=> self.id)
     end
