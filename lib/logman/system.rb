@@ -31,7 +31,7 @@ class Logman
   
   def self.env
     en = ENV['RACK_ENV'] || 'production'
-    e.to_sym
+    en.to_sym
   end
   
   def self.configure(&block)

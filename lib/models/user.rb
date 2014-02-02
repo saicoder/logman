@@ -1,11 +1,13 @@
 
 
-module Logman
+class Logman
   class User
     include Mongoid::Document
-    self.collection_name = 'logman_users'
-
-    has_secure_password :validations=>false
+    include ActiveModel::SecurePassword
+    
+    store_in collection: 'logman_users'
+    
+    attr_accessible :email, :password, :name, :admin
     
     validates_presence_of :email, :name
     validates_presence_of :password, :on=> :create
@@ -17,6 +19,8 @@ module Logman
     field :name, type: String 
     field :admin, type: Boolean
     
+    has_secure_password
+    
     # buckets that user have access     
     def buckets
       return Bucket.all if self.admin
@@ -24,7 +28,9 @@ module Logman
       Bucket.where(:user_ids=> self.id)
     end
     
+    
     def serializable_hash(options={})
+      options[:methods] ||= [:id]
       options[:except] ||= [:password_digest]
       super(options)
     end

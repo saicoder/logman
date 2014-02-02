@@ -1,5 +1,5 @@
 
-module Logman
+class Logman
   class Auth < ConsoleBase
     get '/login' do
       erb :login, locals:{ :invalid=> false, :register=> (User.count==0) }
@@ -20,8 +20,8 @@ module Logman
       end       
       
       #login routine       
-      user = User.find_by_email(params[:email])
-     
+      user = User.where(:email=>params[:email]).first
+      
       if user.nil? || user.authenticate(params[:password]).blank?
         erb :login, locals:{ :invalid=> true, :register=>false }
       else

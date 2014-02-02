@@ -1,18 +1,19 @@
-module Logman
+class Logman
   
   class LogWriter < Sinatra::Base
     post '/api/write' do
       json = JSON.parse(request.body.read) 
-      bucket = Bucket.find_by_write_token(params[:key])
+      bucket = Bucket.where(:write_token=>params[:key]).first
+      
       if bucket.nil?
         status 401
         return 'Invalid token' 
       end
       
+      Bucket.set_bucket_collection bucket.bucket_key
+      
       log = Log.new(json)
       log.datetime = Time.now if log.datetime.blank?
-      log.bucket = bucket
-      
       
       if log.save
         return status 200

@@ -5,7 +5,7 @@ require File.dirname(__FILE__) + '/user_api'
 require File.dirname(__FILE__) + '/bucket_api'
 require File.dirname(__FILE__) + '/log_api'
 
-module Logman
+class Logman
   class WebConsole < ConsoleBase
       set :public_folder, File.dirname(__FILE__) + '/static'
       set :views, File.dirname(__FILE__) + '/views'

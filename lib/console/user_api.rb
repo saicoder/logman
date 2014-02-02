@@ -1,4 +1,4 @@
-module Logman
+class Logman
   class UserAPI < ConsoleBase
     
     get '/api/users',:auth=>:user do

@@ -1,6 +1,14 @@
 development:
   sessions:
     default:
-      database: mongoid
+      database: logman
       hosts:
         - localhost:27017
+
+production: #connection for Heroku and MongoHQ
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ_URL'] %>
+      options:
+        skip_version_check: true
+        safe: true

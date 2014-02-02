@@ -1,6 +1,43 @@
 <div ng-controller="LogsCtl">
-	<h3> <i class="fa fa-list"></i> {{bucket.name}}</h3>
+	<h3> 
+		<i class="fa fa-list"></i> {{bucket.name}}
+		<button type="button" ng-click="query_view=!query_view" class="btn btn-default pull-right">
+			<i class="fa fa-filter"></i> Query
+		</button>
+	</h3>
 	<hr>
+	
+	<div ng-show="query_view" class="panel panel-info">
+		<div class="panel-body">
+			
+			<div class="row criteria-item" ng-repeat="c in criterias">
+				<div class="col-lg-4">
+					<input type="text" ng-model="c.property" placeholder="property" class="form-control"/>
+				</div>
+				<div class="col-lg-1">
+					<select class="form-control" ng-model="c.operator">
+						<option value="=">=</option>
+						<option value=">">&gt;</option>
+						<option value="<">&lt;</option>
+						<option value=">=">&gt;=</option>
+						<option value="<=">&lt;=</option>
+						<option value="~">~ contains</option>
+					</select>
+				</div>
+				<div class="col-lg-5">
+					<input type="text" ng-model="c.value" placeholder="value" class="form-control"/>
+				</div>
+				<div class="col-lg-1">
+					<button ng-click="removeCriteria(c)" class="btn btn-danger"> <i class="fa fa-minus"></i> </button>
+				</div>
+			</div>
+			
+			<br>	
+			<button ng-click="criterias.push({})" class="btn btn-default"> <i class="fa fa-plus"></i></button>
+			<button ng-click="loadLogs()" class="btn btn-info"> <i class="fa fa-bolt"></i> Execute </button>
+				
+		</div>
+	</div>
 		
 	<blockquote class="log-entry log-entry-type{{l.log_type}}" ng-repeat="l in logs.items">
 		<div class="row" ng-click="show(l)">
@@ -19,5 +56,5 @@
 	  <p><a href="#/api_guide" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 	</div>
 	
-	<pagination ng-show="logs.items.length != 0" total-items="logs.total_items" on-select-page="loadLogs(page)" page="logs.page" class="pagination-sm"></pagination>
+	<pagination max-size="15" boundary-links="true" ng-show="logs.items.length != 0" total-items="logs.total_items" on-select-page="loadLogs(page)" page="logs.page" class="pagination-sm"></pagination>
 </div>

@@ -1,4 +1,4 @@
-module Logman
+class Logman
   class LogAPI < ConsoleBase
     
     get '/api/buckets/:id/logs',:auth=>:user do
@@ -8,20 +8,25 @@ module Logman
         status 404
       else
         page = params[:page] || 1
-         
-        pagination={
-          :order    => :created_at.desc,
-          :per_page => params[:per_page] || 10, 
-          :page     => page
-        }
+        per_page = params[:per_page] || 10 
         
+        page = page.to_i
+        per_page = per_page.to_i
        
-        data = bucket.logs.paginate(pagination)
+        data = bucket.logs.order_by(:_id.desc)
+        
+        query = QueryBuilder.new(data)
+        data = query.execute(params[:query])
+        
+        
+        #paginate 
+        total_count = data.count      
+        data = data.skip((page-1)*per_page).take(per_page)
         
         res ={
           :page => page,
           :items => data,
-          :total_items => bucket.logs.count,
+          :total_items => total_count,
         }
         
         json res
