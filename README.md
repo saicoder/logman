@@ -9,13 +9,15 @@ Logs are saved to mongo database.
 
 Add this line to your application's Gemfile:
 
-    gem 'logman', :git=>'git://github.com/saicoder/logman.git'
+    gem 'logman'
 
 And then execute:
 
     $ bundle
 
-Version of logman at Rubygems.org currently don't have dependencies defined, so best way to install it is over git
+Or install it yourself as:
+
+    $ gem install logman
 
 ## Usage
 
