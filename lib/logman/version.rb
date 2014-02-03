@@ -1,3 +1,3 @@
-module Logman
-  VERSION = "0.0.2"
+class Logman
+  VERSION = "0.1.0.alpha"
 end

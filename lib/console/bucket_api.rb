@@ -1,4 +1,4 @@
-module Logman
+class Logman
   class BucketAPI < ConsoleBase
     
     get '/api/buckets',:auth=>:user do
