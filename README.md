@@ -31,7 +31,7 @@ development:
       hosts:
         - localhost:27017
 
-production: #connection for Heroku and MongoHQ
+production: #example connection for Heroku and MongoHQ
   sessions:
     default:
       uri: <%= ENV['MONGOHQ_URL'] %>
